@@ -14,7 +14,10 @@ script:
   - docker run -e CI=true docker-react-travis npm run test
 
 after_success:
-  - docker build -t hatemabushaala/multi-client ./client
-  - docker build -t hatemabushaala/multi-server ./server
-  - docker build -t hatemabushaala/multi-worker ./worker
-  - docker build -t hatemabushaala/multi-nginx ./nginx
+  - docker build -t hatemabushaala1998/multi-client ./client
+  - docker build -t hatemabushaala1998/multi-server ./server
+  - docker build -t hatemabushaala1998/multi-worker ./worker
+  - docker build -t hatemabushaala1998/multi-nginx ./nginx
+  # push images to docker-hub
+  # get email and password from travis env
+  - docker login "$DOCKER_USERNAME" "$DOCKER_PASSWORD"
