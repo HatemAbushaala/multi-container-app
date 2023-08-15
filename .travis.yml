@@ -1,0 +1,20 @@
+sudo: required
+
+services:
+  # we need to tell travis that we want to use docker
+  - docker
+
+before_install:
+  # build development image
+  # note that we used ./client as build context
+  - docker build -f ./client/Dockerfile.dev -t docker-react-travis ./client
+
+script:
+  # -e CI=true to show result and exit
+  - docker run -e CI=true docker-react-travis npm run test
+
+after_success:
+  - docker build -t hatemabushaala/multi-client ./client
+  - docker build -t hatemabushaala/multi-server ./server
+  - docker build -t hatemabushaala/multi-worker ./worker
+  - docker build -t hatemabushaala/multi-nginx ./nginx
