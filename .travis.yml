@@ -20,4 +20,10 @@ after_success:
   - docker build -t hatemabushaala1998/multi-nginx ./nginx
   # push images to docker-hub
   # get email and password from travis env
-  - docker login "$DOCKER_USERNAME" "$DOCKER_PASSWORD"
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  # push to docker
+  - docker push hatemabushaala1998/multi-client
+  - docker push hatemabushaala1998/multi-server
+  - docker push hatemabushaala1998/multi-worker
+  - docker push hatemabushaala1998/multi-nginx
+  - echo "push done to docker"
